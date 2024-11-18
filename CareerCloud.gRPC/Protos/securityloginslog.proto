@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "CareerCloud.gRPC";
+package securityloginslog;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service SecurityLoginLogs{
+	rpc PostSecurityLoginLogs(MultipleSecurityLoginLogs) returns (google.protobuf.Empty);
+    rpc GetSecurityLoginLogs(SecurityLoginsLogId) returns (SecurityLoginLogsType);
+    rpc GetAllSecurityLoginLogs(google.protobuf.Empty) returns (MultipleSecurityLoginLogs);
+    rpc PutSecurityLoginLogs(MultipleSecurityLoginLogs) returns (google.protobuf.Empty);
+    rpc DeleteSecurityLoginLogs(MultipleSecurityLoginLogs) returns (google.protobuf.Empty);
+}
+message SecurityLoginsLogId{
+    string Id = 1;
+}
+message SecurityLoginLogsType {
+    string Id = 1;                     
+    string Login = 2;                  
+    string SourceIP = 3;               
+    google.protobuf.Timestamp LogonDate = 4;              
+    bool IsSuccessful = 5;                    
+}
+
+message MultipleSecurityLoginLogs{
+	repeated SecurityLoginLogsType securityloginslogs = 1;
+}

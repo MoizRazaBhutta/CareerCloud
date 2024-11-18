@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "CareerCloud.gRPC";
+package companyjob;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service CompanyJob{
+	rpc PostCompanyJob(MultipleCompanyJobs) returns (google.protobuf.Empty);
+    rpc GetCompanyJob(CompanyJobId) returns (CompanyJobType);
+    rpc GetAllCompanyJob(google.protobuf.Empty) returns (MultipleCompanyJobs);
+    rpc PutCompanyJob(MultipleCompanyJobs) returns (google.protobuf.Empty);
+    rpc DeleteCompanyJob(MultipleCompanyJobs) returns (google.protobuf.Empty);
+}
+message CompanyJobId{
+    string Id = 1;
+}
+message CompanyJobType {
+    string Id = 1;                  
+    string Company = 2;               
+    google.protobuf.Timestamp ProfileCreated = 3;       
+    bool IsInactive = 4;
+    bool IsCompanyHidden = 5;           
+}
+
+message MultipleCompanyJobs{
+	repeated CompanyJobType companyjobs = 1;
+}
